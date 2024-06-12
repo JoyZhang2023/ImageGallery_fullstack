@@ -1,11 +1,55 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, Image, Platform, ActivityIndicator } from 'react-native';
 
 import { Collapsible } from '@/components/Collapsible';
 import { ExternalLink } from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+
+interface IMyComponentProps {} // we don’t use props for this case.
+interface IMyComponentState {
+ isLoading: boolean,
+ dataSource?: string
+}
+
+export class App extends React.Component<IMyComponentProps, IMyComponentState> {
+  constructor(props: any) {
+    super(props);
+    this.state = { isLoading: true};
+   }
+   render(){
+    if(this.state.isLoading){
+      return(
+        <View style={{flex: 1, padding: 20}}>
+          <ActivityIndicator/>
+        </View>
+      )
+    }
+    
+    return (
+      <View style={styles.container}>
+        <Text>{this.state.dataSource}</Text>
+      </View>
+    );
+  }
+  componentDidMount(){
+    return fetch('http://localhost:3000')
+      .then((response) => response.text())
+      .then((responseString) => {
+        this.setState({
+          isLoading: false,
+          dataSource: responseString
+        });
+      })
+    .catch((error) =>{
+      console.error(error);
+    });
+  }
+}
+
+
 
 export default function TabTwoScreen() {
   return (
@@ -98,5 +142,11 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     gap: 8,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
