@@ -16,7 +16,7 @@ Requirements:
 - Error Handling: Implement proper error handling and user feedback mechanisms.
 
 ## Demonstration
-
+https://github.com/JoyZhang2023/ImageGallery_fullstack/assets/137982978/2e0a1d10-5ddc-427b-894f-bf8503a9ae1f
 
 ## Start the Native Expo Project
 `npx expo start`
