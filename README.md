@@ -17,3 +17,8 @@ Requirements:
 
 ## Demonstration
 
+
+## Start the Native Expo Project
+`npx expo start`
+
+## Start the 
